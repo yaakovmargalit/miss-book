@@ -12,7 +12,8 @@ export const bookService = {
     getEmptyBook,
     getById,
     addReview,
-    removeReview
+    removeReview,
+    add
 };
 
 function query() {
@@ -21,6 +22,25 @@ function query() {
 
 function remove(bookId) {
     return storageService.remove(BOOKS_KEY, bookId);
+}
+
+function add(book) {
+    var newBook = getEmptyBook()
+    console.log(book)
+    console.log(newBook)
+
+    newBook.id = book.id
+    newBook.title = book.volumeInfo.title
+    if (book.volumeInfo.subtitle)
+        newBook.description = book.volumeInfo.subtitle
+    newBook.categories = book.volumeInfo.categories
+    newBook.authors = book.volumeInfo.authors
+    newBook.publishedDate = book.volumeInfo.publishedDate
+    newBook.pageCount = book.volumeInfo.pageCount
+    if (book.volumeInfo.imageLinks)
+        newBook.thumbnail = book.volumeInfo.imageLinks.thumbnail
+    storageService.post('books', newBook)
+    return newBook
 }
 
 function addReview(bookId, review) {
@@ -54,15 +74,41 @@ function save(book) {
 }
 
 function getById(bookId) {
-    return storageService.get(BOOKS_KEY, bookId);
+    // return storageService.get(BOOKS_KEY, bookId);
+    return query()
+        .then(books => {
+            const idx = books.findIndex(book => book.id === bookId);
+            // return (idx === books.length - 1) ? books[0].id : books[idx + 1].id;
+            return {
+                book: books.find(book => book.id === bookId),
+                preBookId: (idx === 0) ? books[books.length - 1].id : books[idx - 1].id,
+                nextBookId: (idx === books.length - 1) ? books[0].id : books[idx + 1].id,
+            }
+        });
 }
 
 function getEmptyBook() {
     return {
-        id: '',
-        vendor: '',
-        maxSpeed: 0
-    };
+        "id": "",
+        "title": "",
+        "subtitle": "",
+        "authors": [
+            ""
+        ],
+        "publishedDate": 0,
+        "description": "",
+        "pageCount": 0,
+        "categories": [
+
+        ],
+        "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8kWM9XTU0QxiYEAB6EBlLCJ1V9sIv6lArqg&usqp=CAU",
+        "language": "",
+        "listPrice": {
+            "amount": 30,
+            "currencyCode": "EUR",
+            "isOnSale": false
+        }
+    }
 }
 
 

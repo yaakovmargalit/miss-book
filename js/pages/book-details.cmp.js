@@ -9,8 +9,9 @@ export default {
     <div v-if="currBook" class="book-details">
       <div class="flex">
            <div>
+               <router-link :to="'/book/'+preBookId">< Preview book</router-link> | 
+           <router-link :to="'/book/'+nextBookId">Next book ></router-link>
                 <img class="sale-img" v-if="currBook.listPrice.isOnSale" src='./../img/sale.png'/>
-                <!-- <button class="close-btn" @click="$emit('close')" >X</button> -->
                 <h1>{{currBook.title}}</h1>
                 <img class="book-img" :src= 'currBook.thumbnail'/>
                 <h3>{{pageCountForShow}}</h3>
@@ -29,20 +30,15 @@ export default {
     `,
     data() {
         return {
-            currBook: null
+            currBook: null,
+            preBookId: null,
+            nextBookId: null,
         }
     },
     created() {
-        this.loadBook()
+        console.log(this.$route);
     },
     methods: {
-        loadBook() {
-            const { bookId } = this.$route.params;
-            bookService.getById(bookId)
-                .then(book => {
-                    this.currBook = book
-                })
-        },
         addReview(review) {
             bookService.addReview(this.currBook.id, review)
                 .then(() => {
@@ -51,7 +47,6 @@ export default {
                         type: 'success'
                     };
                     eventBus.$emit('showMsg', msg);
-                    this.loadBook()
                 })
 
         },
@@ -63,7 +58,6 @@ export default {
                         type: 'success'
                     };
                     eventBus.$emit('showMsg', msg);
-                    this.loadBook()
                 })
         }
     },
@@ -77,12 +71,25 @@ export default {
         publishedDateForShow() {
             if ((new Date().getFullYear() - this.currBook.publishedDate) > 10) return ' - - - Veteran Book - - - '
             if ((new Date().getFullYear() - this.currBook.publishedDate) < 1) return 'New!'
-
         }
     },
     components: {
         longText,
         reviewAdd,
         bookReview
+    },
+    watch: {
+        '$route.params.bookId': {
+            handler() {
+                const { bookId } = this.$route.params;
+                bookService.getById(bookId)
+                    .then(book => {
+                        this.currBook = book.book
+                        this.preBookId = book.preBookId
+                        this.nextBookId = book.nextBookId
+                    });
+            },
+            immediate: true
+        }
     }
 }
