@@ -1,0 +1,297 @@
+* {
+    box-sizing: border-box;
+    font-family: sans-serif;
+    text-align: center;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin: 0;
+}
+
+body {
+    margin: 0;
+}
+
+a {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    text-decoration: none;
+    color: black;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* header */
+
+.app-header {
+    padding: 10px;
+    height: 5vh;
+    background-color: lightslategray;
+}
+
+
+/* book-app */
+
+.book-app {}
+
+.logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 35px;
+    color: black;
+    -webkit-text-fill-color: white;
+    /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    text-transform: uppercase;
+}
+
+.logo-img {
+    position: absolute;
+    top: -10px;
+    right: 15%;
+    width: 200px;
+    height: 150px;
+}
+
+
+/* filter */
+
+.book-filter {
+    padding: 20px;
+    background-color: rgb(223, 236, 236);
+    border-bottom: grey 2px solid;
+}
+
+.search {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.search input {
+    margin-top: 10px;
+    text-align: left;
+    padding: 10px;
+    border-radius: 8px;
+    width: 50%;
+}
+
+.filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.filter input {
+    width: 80px;
+    height: 40px;
+    border: none;
+}
+
+.filter>:last-child {
+    cursor: pointer;
+    width: 60px;
+    height: 40px;
+    border: none;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.filter>:first-child {
+    cursor: pointer;
+    width: 80px;
+    height: 40px;
+    border: none;
+    border-right: gray 1px solid;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+
+/* details */
+
+.book-details {
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    min-height: 90vh;
+    background-color: rgb(219, 231, 230);
+}
+
+.book-details .sale-img {
+    width: 90px;
+    position: absolute;
+    left: 25px;
+    top: 25px;
+    opacity: 0.9;
+    transform: rotate(-30deg);
+    border-radius: 50%;
+    z-index: -100;
+}
+
+.book-details .book-img {
+    max-width: 250px;
+    border-radius: 10px;
+}
+
+.book-details .close-btn {
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    background-color: turquoise;
+    border: none;
+    padding: 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.book-details h1 {
+    font-size: 30px;
+    margin: 15px;
+}
+
+.desc {
+    background-color: whitesmoke;
+    padding: 10px;
+    border-radius: 7px;
+}
+
+
+/* list */
+
+.book-list {
+    margin: 0;
+    padding: 20px;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+
+/* preview */
+
+.book-preview-container {
+    cursor: pointer;
+    border-radius: 10px;
+    font-size: 20px;
+    padding: 10px;
+    height: 320px;
+    width: 200px;
+    box-shadow: 0px 0px 9px 5px rgba(19, 83, 134, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.book-preview-container:hover {
+    transform: scale(1.02)
+}
+
+.sale-img-card {
+    width: 40px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    opacity: 0.4;
+    transform: rotate(-30deg);
+    z-index: 1;
+}
+
+.card {
+    position: relative;
+}
+
+.book-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.book-preview h4 {
+    height: 50px;
+    padding: 0;
+}
+
+.book-preview .book-img {
+    width: 150px;
+    border-radius: 4px;
+}
+
+.authors {
+    display: flex;
+}
+
+.authors ul {
+    list-style: none;
+    padding-left: 3px;
+    color: indianred;
+}
+
+.authors p {
+    font-size: 14px;
+}
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
+
+/* footer */
+
+.app-footer {
+    padding: 10px;
+    height: 5vh;
+    background-color: lightslategray;
+}
+
+
+/* user msg */
+
+.user-msg {
+    position: fixed;
+    top: 50px;
+    right: 0;
+    padding: 10px;
+}
+
+.success {
+    background-color: rgb(27, 180, 27);
+}
+
+.error {
+    background-color: red;
+}
+
+
+/* review */
+
+.review-box {
+    flex-wrap: wrap;
+}
